@@ -1,0 +1,58 @@
+<!-- search_books.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - Search Books</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Search Books</h1>
+        <form method="get" class="form-inline my-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="query" placeholder="Search by title, year, author, or category..." value="{{ query }}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+        {% if books %}
+            <h2>Search Results for '{{ query }}'</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year of Release</th>
+                        <th>Editions</th>
+                        <th>Page Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>{{ book.code }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.yearOfRelease }}</td>
+                        <td>{{ book.editions }}</td>
+                        <td>{{ book.pageNumber }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            {% if query %}
+                <p>No books found for '{{ query }}'.</p>
+            {% else %}
+                <p>Enter a search query above to find books.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
